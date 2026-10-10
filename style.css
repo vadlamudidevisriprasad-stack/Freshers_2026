@@ -1,0 +1,34 @@
+/* Constant background: put your poster at images/poster.jpg */
+body{min-height:100vh;color:#222;
+  background:
+   linear-gradient(rgba(25,0,70,.55),rgba(25,0,70,.55)),
+   url("images/poster.jpg") center/cover no-repeat fixed,
+   linear-gradient(135deg,#6a11cb,#ff4e8a,#ffb347) fixed;}
+.hero{animation:fadeDown 1s both}
+.college{color:#fff;font-weight:800;font-size:clamp(1.3rem,4vw,2.6rem);text-shadow:0 3px 12px #0008}
+.address{color:#ffe28a;font-size:1.15rem;margin:0}
+.tagline{color:#fff;margin-top:1rem;font-weight:700;animation:pulse 2s infinite}
+.section-title{text-shadow:0 2px 8px #0008}
+.glass{background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border:1px solid #fff5;
+  border-radius:18px;padding:20px;color:#fff;box-shadow:0 8px 30px #0004;animation:fadeUp .9s both}
+.login-box{max-width:650px}
+.event-card{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:18px;overflow:hidden;
+  margin-bottom:24px;box-shadow:0 10px 30px #0005;animation:fadeUp .8s both;transition:transform .3s}
+.event-card:hover{transform:translateY(-6px) scale(1.01)}
+.event-info{padding:24px}
+.event-info h4{color:#6a11cb;font-weight:800}
+.event-info .count{display:inline-block;background:#ffefc2;border-radius:20px;padding:2px 12px;font-weight:600}
+.event-img{min-height:220px;background-size:cover;background-position:center;display:flex;
+  align-items:center;justify-content:center;font-size:5rem}
+.event-img span{animation:float 3s ease-in-out infinite}
+@media(max-width:700px){.event-card{grid-template-columns:1fr}.event-img{min-height:150px;order:-1}}
+.modal-content{border-radius:16px}
+.modal.fade .modal-dialog{transform:scale(.8);transition:transform .3s}
+.modal.show .modal-dialog{transform:scale(1)}
+#confetti span{position:fixed;top:-20px;width:10px;height:14px;opacity:.8;z-index:-1;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-14px)}}
+@keyframes pulse{50%{transform:scale(1.06)}}
+@media print{body *{visibility:hidden}#confBody,#confBody *{visibility:visible}#confBody{position:absolute;left:0;top:0}}

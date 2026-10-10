@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    // Public: read counts, create/increment by 1 only
+    match /counters/{id} {
+      allow read: if true;
+      allow write: if request.resource.data.count ==
+        (resource == null ? 1 : resource.data.count + 1);
+    }
+    // Create-only for students (blocks duplicates: same doc id = update = denied); read only by admins
+    match /registrations/{id} {
+      allow create: if request.resource.data.keys().hasAll(['eventId','adm','name','dept','mobile','mail'])
+                    && id == request.resource.data.eventId + '_' + request.resource.data.adm.replace('[^A-Z0-9]', '');
+      allow read: if isAdmin();
+    }
+    match /admins/{uid} { allow read: if request.auth != null && request.auth.uid == uid; }
+  }
+}
